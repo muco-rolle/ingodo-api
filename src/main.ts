@@ -9,8 +9,8 @@ import { logger } from '@utils/logger';
 import { database } from '@config/database';
 
 async function bootstrap() {
-    const host = env.get('app_host');
-    const port = env.get('app_port');
+    const host = env.get('host');
+    const port = env.get('port');
 
     const app = express();
 
