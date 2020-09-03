@@ -10,7 +10,7 @@ export const env = {
         const path = join(rootPath, envFilePath);
 
         if (!existsSync(path)) {
-            throw Error(`File ${basename(path)} does not exist.`);
+            return process.env[key.toUpperCase()];
         }
 
         const envConfig = config({ path });
