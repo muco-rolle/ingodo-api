@@ -9,7 +9,7 @@ import { logger } from '@utils/logger';
 import { database } from '@config/database';
 
 async function bootstrap() {
-    const url = env.get('app_url');
+    const host = env.get('app_host');
     const port = env.get('app_port');
 
     const app = express();
@@ -24,7 +24,7 @@ async function bootstrap() {
     apolloServer.applyMiddleware({ app, path: '/api' });
 
     // start server
-    app.listen(port, () => logger.info(`server running at ${url}`));
+    app.listen(port, () => logger.info(`server running at ${host}:${port}`));
 }
 
 bootstrap();
