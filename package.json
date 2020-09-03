@@ -7,7 +7,7 @@
     "license": "MIT",
     "scripts": {
         "start:dev": "NODE_ENV=development nodemon",
-        "start:prod": "NODE_ENV=production node -r ./bootstrap.js ./build/main.js",
+        "start": "NODE_ENV=production node -r ./bootstrap.js ./build/main.js",
         "start:build": "tsc",
         "clean": "rimraf build",
         "lint": "./node_modules/.bin/eslint src --ext .js,.jsx,.ts,.tsx",

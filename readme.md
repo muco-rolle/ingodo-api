@@ -22,4 +22,4 @@ Manage your income and expenses easily
 
 -   rename `.env.development` to `.env.production` and assign env values
 -   `yarn start:build`
--   `yarn start:prod`
+-   `yarn start`
