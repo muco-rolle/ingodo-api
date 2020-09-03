@@ -1,33 +1,27 @@
-# ingodo-web
+# ingodo-api
+
 Manage your income and expenses easily
 
-you can find the api on: https://github.com/muco-rolle/ingodo-api 
+You can find a web-client on: https://github.com/muco-rolle/ingodo-web
 
-## Available Scripts
+### Installation
 
-In the project directory, you can run:
+-   `git@github.com:muco-rolle/ingodo-api.git`
+-   `cd ingodo-api`
+-   `yarn install` install dependencies
 
-### `yarn start`
+### Setup
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-   rename `.env.example` to `.env.development` and assign env values
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Run in development
 
-### `yarn test`
+-   `yarn start:dev`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+*   visit `http://localhost:5000/api`
 
-### `yarn build`
+### Run in production
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-
+-   rename `.env.development` to `.env.production` and assign env values
+-   `yarn start:build`
+-   `yarn start`
