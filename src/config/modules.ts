@@ -1,6 +1,7 @@
 import * as Joi from '@hapi/joi';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ENV_FILE } from 'config';
 import { join } from 'path';
 
@@ -41,6 +42,23 @@ export const config = {
 	graphql() {
 		return GraphQLModule.forRoot({
 			autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+		});
+	},
+
+	/**
+	 * Configuration for mongodb (mongoose)
+	 ***********************************************/
+	mongodb() {
+		return MongooseModule.forRootAsync({
+			imports: [ConfigModule],
+			useFactory: (config: ConfigService) => ({
+				uri: config.get('DB_URL'),
+				useNewUrlParser: true,
+				useCreateIndex: true,
+				useUnifiedTopology: true,
+				useFindAndModify: false,
+			}),
+			inject: [ConfigService],
 		});
 	},
 };
