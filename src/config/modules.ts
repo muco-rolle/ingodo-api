@@ -2,6 +2,9 @@ import * as Joi from '@hapi/joi';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+
 import { ENV_FILE } from 'config';
 import { join } from 'path';
 
@@ -58,6 +61,36 @@ export const config = {
 				useUnifiedTopology: true,
 				useFindAndModify: false,
 			}),
+			inject: [ConfigService],
+		});
+	},
+
+	/**
+	 * Configuration for nodemailer
+	 ***********************************************/
+	mailer() {
+		return MailerModule.forRootAsync({
+			imports: [ConfigModule],
+			useFactory: (config: ConfigService) => ({
+				transport: {
+					host: config.get('MAIL_HOST'),
+					port: +config.get('MAIL_PORT'),
+					secure: false,
+					auth: {
+						user: config.get('MAIL_USER'),
+						pass: config.get('MAIL_PASSWORD'),
+					},
+				},
+				defaults: { from: 'Notebook <support@notebook.com>' },
+				template: {
+					dir: process.cwd() + '/src/templates/',
+					adapter: new HandlebarsAdapter(),
+					options: {
+						strict: true,
+					},
+				},
+			}),
+
 			inject: [ConfigService],
 		});
 	},
