@@ -1,30 +1,8 @@
-import * as express from 'express';
-import { env } from '@utils/env';
-import { server } from '@config/apollo-server';
-
-import { schema } from '@modules/schemas';
-import { resolvers } from '@modules/resolvers';
-import { providers } from '@modules/providers';
-import { logger } from '@utils/logger';
-import { database } from '@config/database';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-    const host = env.get('host');
-    const port = env.get('port');
-
-    const app = express();
-
-    // create apollo server
-    const apolloServer = server.run(schema, resolvers, providers);
-
-    // start database
-    database.run();
-
-    // add express middlewares
-    apolloServer.applyMiddleware({ app, path: '/api' });
-
-    // start server
-    app.listen(port, () => logger.info(`server running at ${host}:${port}`));
+	const app = await NestFactory.create(AppModule);
+	await app.listen(3000);
 }
-
 bootstrap();

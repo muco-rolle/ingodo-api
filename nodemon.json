@@ -1,6 +1,0 @@
-{
-    "watch": ["."],
-    "ext": "ts",
-    "ignore": ["src/**/*.spec.ts"],
-    "exec": "ts-node --transpile-only  -r tsconfig-paths/register src/main.ts"
-}
